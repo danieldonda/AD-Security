@@ -75,3 +75,10 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 - T1599: Pass the Key
 - T1600: Kerberos Silver Ticket
 - T1603: Kerberos Authentication Request Spoofing
+
+#ersion History
+Version 1.1
+
+
+Version 1.0
+Janeiro de 2023, versão inicial
