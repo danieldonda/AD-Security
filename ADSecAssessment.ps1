@@ -1,15 +1,28 @@
+#------------------------------------------------------------------------------------------------------------#
 # Assessment de segurança no Active Directory
 # Objetivo: Coletar informações e identificar pontos críticos na segurança do AD
 # Autor: Daniel Donda
 # Data: 30/01/2023
 # Nota: Este script coleta informações sobre o AD e exibe na tela. Não execute em produção sem autorização.
+#------------------------------------------------------------------------------------------------------------#
+
+
+# ------------------------------- #
+# Variaveis e funções do scripts  #
+# ------------------------------- #
 
 Import-Module ActiveDirectory
 Clear-Host
 #calcula 180 dias
 $date = Get-Date
 $180daysAgo = $date.AddDays(-180)
-
+$folder = "C:\temp"
+if (!(Test-Path -Path $folder)) {
+    New-Item -ItemType Directory -Path $folder
+    Write-Host "Pasta $folder criada com sucesso." -ForegroundColor Green
+} else {
+    Write-Host "Pasta $folder já existe."
+}
 
 # Exibe o nome do script
 Write-Host "    _    ____    ____                       _ _          "
@@ -21,8 +34,9 @@ Write-Host "                                                  |___/  "
 Write-Host "AD SECURITY ASSESSMENT 1.1 | "$date -ForegroundColor Green
 Write-Host "=========================================================" 
                                                                                                                                                                           
-
-# variaveis de coleta de informações sobre as contas(7 itens)
+#-----------------------------------------------------#
+# variaveis de coleta de informações sobre as contas  #
+#-----------------------------------------------------#
 $userspne = Get-ADUser -Filter {(PasswordNeverExpires -eq $true)} -Properties DisplayName,SamAccountName,PasswordLastSet
 $usersadmin = Get-ADGroupMember -Identity "Domain Admins" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
 $usersadmin1 = Get-ADGroupMember -Identity "Administrators" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
@@ -33,8 +47,9 @@ $AdminsdHolder=  get-aduser -Filter {admincount -gt 0} -Properties adminCount -R
 $Guest = Get-ADUser -Filter {SamAccountName -eq "Guest"} -Properties Enabled 
 $inativos = Search-ADAccount –AccountInActive –UsersOnly –TimeSpan 180:00:00:00 –ResultPageSize 2000 –ResultSetSize $null | ?{$_.Enabled –eq $True} 
 
-
-# Variaveis de coleta de informações sobre o AD (8 itens)
+#------------------------------------------------#
+# Variaveis de coleta de informações sobre o AD  #
+#------------------------------------------------#
 $Domain = Get-ADDomain
 $Forest = Get-ADForest
 $DomainName = $Domain.DNSRoot
@@ -44,8 +59,9 @@ $ComputersCount = (Get-ADComputer -Filter * -SearchBase $Domain.DistinguishedNam
 $GroupsCount = (Get-ADGroup -Filter * -SearchBase $Domain.DistinguishedName).Count
 $domainControllers = Get-ADDomainController -Filter *
 $OUsCount = (Get-ADOrganizationalUnit -Filter * -SearchBase $Domain.DistinguishedName).Count
-
-# Variaveis de coleta de informações sobre a politica de senha do AD
+#--------------------------------------------------------------------#
+# Variaveis de coleta de informações sobre a politica de senha do AD #
+#--------------------------------------------------------------------#
 $passcomp = (Get-ADDefaultDomainPasswordPolicy).ComplexityEnabled  
 $passlengh = (Get-ADDefaultDomainPasswordPolicy).MinPasswordLength  
 $passhistory = (Get-ADDefaultDomainPasswordPolicy).PasswordHistoryCount 
@@ -53,6 +69,10 @@ $passblock = (Get-ADDefaultDomainPasswordPolicy).LockoutThreshold
 $passdesblock = (Get-ADDefaultDomainPasswordPolicy).LockoutDuration
 $passage = (Get-ADDefaultDomainPasswordPolicy).MaxPasswordAge.days 
 $passage2 = (Get-ADDefaultDomainPasswordPolicy).MinPasswordAge.days 
+
+#-----------------------------#
+# ATAQUES AO ACTIVE DIRECTORY #
+#-----------------------------#
 
 # variaveis de coleta de informações sobre o ataque Golden Ticket.
 $krbtgt = Get-ADUser -Filter {samAccountName -eq "krbtgt"} -Properties WhenChanged
@@ -127,27 +147,6 @@ Write-Host "---------------------------------------------------------"
 # ----------------------------------------- #
 # Exportação de informações no formato CSV. #
 # ----------------------------------------- #
-# Verificação do diretório "temp" e listagem de arquivos CSV.
-
-$folder = "C:\temp"
-if (!(Test-Path -Path $folder)) {
-    New-Item -ItemType Directory -Path $folder
-    Write-Host "Pasta $folder criada com sucesso." -ForegroundColor Green
-} else {
-    Write-Host "Pasta $folder já existe."
-}
-
-$csvFiles = Get-ChildItem -Path $folder -Filter "*.csv" -Recurse
-
-if ($csvFiles) {
-    Write-Host "Arquivos .csv criados com sucesso:" -ForegroundColor Green
-    foreach ($file in $csvFiles) {
-        Write-Host $file.FullName
-    }
-} else {
-    Write-Host "Não foi possivel gravar os arquivos .csv na pasta $folder" -ForegroundColor Red
-}
- 
 $userspne | Export-Csv -Path "C:\temp\users-password-never-expire.csv" -NoTypeInformation -Encoding UTF8
 $usersadmin | Export-Csv -Path "C:\temp\users-domain-admins.csv" -NoTypeInformation -Encoding UTF8
 $usersadmin1 | Export-Csv -Path "C:\temp\users-domain-administrators.csv" -NoTypeInformation -Encoding UTF8
@@ -157,4 +156,20 @@ $userssidhistory | Export-Csv -Path "C:\temp\users-sidhistory.csv" -NoTypeInform
 $AdminsdHolder  | Export-Csv -Path "C:\temp\AdminsdHolder.csv" -NoTypeInformation -Encoding UTF8
 $kerbdelegation | Export-Csv -Path "C:\temp\Kerbdelegation.csv" -NoTypeInformation -Encoding UTF8
 $spoolerEnabled | Export-Csv -Path "C:\temp\PrintSpoolerEnabled.csv" -NoTypeInformation -Encoding UTF8
-$inativos | Export-Csv -Path "C:\temp\usuarios-inativos.csv" -NoTypeInformation -Encoding UTF8       
+$inativos | Export-Csv -Path "C:\temp\usuarios-inativos.csv" -NoTypeInformation -Encoding UTF8     
+
+
+# Validação de arquivos CSV.
+
+$csvFiles = Get-ChildItem -Path $folder -Filter "*.csv" -Recurse
+
+if ($csvFiles) {
+    Write-Host  $csvFiles.count "Arquivos .csv criados com sucesso:" -ForegroundColor Green
+    foreach ($file in $csvFiles) {
+       # Write-Host $file.count
+    }
+} else {
+    Write-Host "Não foi possivel gravar os arquivos .csv na pasta $folder" -ForegroundColor Red
+}
+ 
+
