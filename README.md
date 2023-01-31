@@ -43,7 +43,7 @@ O Script exibe:
 ![image](https://user-images.githubusercontent.com/16530643/215624922-d7163079-932c-467e-8155-16e12fbde82f.png)
 
 
-##Como usar?
+## Como usar?
 
 Basta baixar o arquivo e executar com credenciais adminmistrativas em controlador de dominio.
 
