@@ -43,27 +43,27 @@ O Script exibe:
 
 ## TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK para o ataque **Golden Ticket** 
 
--T1110.001: Brute Force: Utilização de técnicas de força bruta para adquirir o hash Kerberos do usuário administrador da conta KRBTGT.
--T1559.002: Domain Hierarchy Traversal: Comprometimento da conta KRBTGT para aproveitar a sua capacidade de criar tickets Kerberos válidos para qualquer usuário ou computador em todo o domínio.
--T1558.003: Use of Default Account: Utilização da conta KRBTGT para fornecer autenticação elevada a um invasor.
--T1208: Exploitation of Trusted Relationships: Exploração de relações de confiança, como a autenticação Kerberos, para acessar recursos e dados sensíveis.
--T1212: Exploitation of Vulnerability: Aproveitamento de vulnerabilidades do sistema para obter acesso privilegiado, como a obtenção de hash do KRBTGT.
+- T1110.001: Brute Force: Utilização de técnicas de força bruta para adquirir o hash Kerberos do usuário administrador da conta KRBTGT.
+- T1559.002: Domain Hierarchy Traversal: Comprometimento da conta KRBTGT para aproveitar a sua capacidade de criar tickets Kerberos válidos para qualquer usuário ou computador em todo o domínio.
+- T1558.003: Use of Default Account: Utilização da conta KRBTGT para fornecer autenticação elevada a um invasor.
+- T1208: Exploitation of Trusted Relationships: Exploração de relações de confiança, como a autenticação Kerberos, para acessar recursos e dados sensíveis.
+- T1212: Exploitation of Vulnerability: Aproveitamento de vulnerabilidades do sistema para obter acesso privilegiado, como a obtenção de hash do KRBTGT.
 
 ## TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK para o ataque **DCSync** 
 
--T1110 - Brute Force
--T1003.001 - Credential Dumping: LSASS Memory
--T1098 - Account Manipulation
--T1003 - Credential Dumping
--T1021 - Remote Services
--T1041 - Exfiltration Over Command and Control Channel
+- T1110 - Brute Force
+- T1003.001 - Credential Dumping: LSASS Memory
+- T1098 - Account Manipulation
+- T1003 - Credential Dumping
+- T1021 - Remote Services
+- T1041 - Exfiltration Over Command and Control Channel
 
 ## Os IDs dos TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK que abusam de Kerberos Delegation são:
 
--T1208: Kerberos Delegation
--T1569: Kerberos Golden Ticket
--T1597: Pass the Ticket
--T1598: Pass the Hash
--T1599: Pass the Key
--T1600: Kerberos Silver Ticket
--T1603: Kerberos Authentication Request Spoofing
+- T1208: Kerberos Delegation
+- T1569: Kerberos Golden Ticket
+- T1597: Pass the Ticket
+- T1598: Pass the Hash
+- T1599: Pass the Key
+- T1600: Kerberos Silver Ticket
+- T1603: Kerberos Authentication Request Spoofing
