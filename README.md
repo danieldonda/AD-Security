@@ -76,9 +76,10 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 - T1600: Kerberos Silver Ticket
 - T1603: Kerberos Authentication Request Spoofing
 
-#ersion History
+# Version History
 Version 1.1
-
+Janeiro de 2023
+Otimização do código e suas variaveis.
 
 Version 1.0
 Janeiro de 2023, versão inicial
