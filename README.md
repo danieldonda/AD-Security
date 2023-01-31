@@ -1,5 +1,9 @@
+
 # AD-Security-Assessment
 Script do Powershell para uma rápida visualização de informações criticas de segurança para o Active Directory. 
+
+> Esse script pode auxiliar me caso de comprometimento do Active
+> Directory
 
 Realizar um assessment de segurança no Active Directory é importante por várias razões, incluindo:
 - Identificação de ameaças: O assessment ajuda a identificar as ameaças e vulnerabilidades existentes no seu ambiente Active Directory, permitindo que você tome medidas para corrigi-las antes que sejam exploradas por atacantes.
@@ -16,19 +20,20 @@ O Script exibe:
 - Quantidade de domain controllers 
 - Quantidade de grupos 
 - Quantidade de OUs
-- Usuários com senha que nunca expira (exibe a quatidade e gera um csv com a lista de objetos)
-- Usuários sem logon (180 dias) (exibe a quatidade e gera um csv com a lista de objetos)
-- Usuários no grupo Domain Admins (exibe a quatidade e gera um csv com a lista de objetos)
-- Usuários no grupo Administrators (exibe a quatidade e gera um csv com a lista de objetos)
-- Usuários inativos (180 dias)(exibe a quatidade e gera um csv com a lista de objetos)
-- Usuários com SIDHistory (exibe a quatidade e gera um csv com a lista de objetos)
-- AdminSDHolder (exibe a quatidade e gera um csv com a lista de objetos)
-- Conta Guest Habilitada - Apenas exibe na tela 
-- Politica de senha - Apenas exibe na tela
+- Usuários com senha que nunca expira *(exibe a quantidade e gera um csv com a lista de objetos)*
+- Usuários sem logon (180 dias) *(exibe a quantidade e gera um csv com a lista de objetos)*
+- Usuários no grupo Domain Admins *(exibe a quantidade e gera um csv com a lista de objetos)*
+- Usuários no grupo Administrators *(exibe a quantidade e gera um csv com a lista de objetos)*
+- Usuários inativos (180 dias) *(exibe a quantidade e gera um csv com a lista de objetos)*
+- Usuários com SIDHistory *(exibe a quantidade e gera um csv com a lista de objetos)*
+- AdminSDHolder *(exibe a quantidade e gera um csv com a lista de objetos)*
+- Conta Guest Habilitada - *Apenas exibe na tela* 
+- Politica de senha - *Apenas exibe na tela*
 
 # Destaque
-- GOLDEN TICKET ATTACK - Exibe quando foi modificada a conta krbtgt
-- DCSYNC ATTACK - Exibe contas com a criptografia reversivel habiltada
-- PRINT SPOOLER ATTACK - Exite Kerberos Delegation e os DCs com Print Spooler Habilitado
+
+- **GOLDEN TICKET ATTACK** - Exibe quando foi modificada a conta krbtgt
+- **DCSYNC ATTACK** - Exibe contas com a criptografia reversivel habiltada
+- **PRINT SPOOLER ATTACK** - Exibe Kerberos Delegation e os DCs com Print Spooler Habilitado
 
 ![image](https://user-images.githubusercontent.com/16530643/215624922-d7163079-932c-467e-8155-16e12fbde82f.png)
