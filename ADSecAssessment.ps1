@@ -34,7 +34,7 @@ $Guest = Get-ADUser -Filter {SamAccountName -eq "Guest"} -Properties Enabled
 $inativos = Search-ADAccount –AccountInActive –UsersOnly –TimeSpan 180:00:00:00 –ResultPageSize 2000 –ResultSetSize $null | ?{$_.Enabled –eq $True} 
 
 
-## Variaveis de coleta de informações sobreo AD (8 itens)
+# Variaveis de coleta de informações sobre o AD (8 itens)
 $Domain = Get-ADDomain
 $Forest = Get-ADForest
 $DomainName = $Domain.DNSRoot
@@ -45,7 +45,7 @@ $GroupsCount = (Get-ADGroup -Filter * -SearchBase $Domain.DistinguishedName).Cou
 $domainControllers = Get-ADDomainController -Filter *
 $OUsCount = (Get-ADOrganizationalUnit -Filter * -SearchBase $Domain.DistinguishedName).Count
 
-#Senhas(7 itens)
+# Variaveis de coleta de informações sobre a politica de senha do AD
 $passcomp = (Get-ADDefaultDomainPasswordPolicy).ComplexityEnabled  
 $passlengh = (Get-ADDefaultDomainPasswordPolicy).MinPasswordLength  
 $passhistory = (Get-ADDefaultDomainPasswordPolicy).PasswordHistoryCount 
