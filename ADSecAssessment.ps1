@@ -1,4 +1,4 @@
-# Assessamento de segurança no Active Directory
+# Assessment de segurança no Active Directory
 # Objetivo: Coletar informações e identificar pontos críticos na segurança do AD
 # Autor: Daniel Donda
 # Data: 30/01/2023
@@ -11,18 +11,18 @@ $date = Get-Date
 $180daysAgo = $date.AddDays(-180)
 
 
-# Display the title
+# Exibe o nome do script
 Write-Host "    _    ____    ____                       _ _          "
 Write-Host "   / \  |  _ \  / ___|  ___  ___ _   _ _ __(_) |_ _   _  "
 Write-Host "  / _ \ | | | | \___ \ / _ \/ __| | | | '__| | __| | | | "
 Write-Host " / ___ \| |_| |  ___) |  __/ (__| |_| | |  | | |_| |_| | "
 Write-Host "/_/   \_\____/  |____/ \___|\___|\__,_|_|  |_|\__|\__, | "
 Write-Host "                                                  |___/  "                                               
-Write-Host "AD SECURITY ASSESSMENT 1.0 | "$date -ForegroundColor Green
+Write-Host "AD SECURITY ASSESSMENT 1.1 | "$date -ForegroundColor Green
 Write-Host "=========================================================" 
                                                                                                                                                                           
 
-#info sobre as contas(7 itens)
+# variaveis de coleta de informações sobre as contas(7 itens)
 $userspne = Get-ADUser -Filter {(PasswordNeverExpires -eq $true)} -Properties DisplayName,SamAccountName,PasswordLastSet
 $usersadmin = Get-ADGroupMember -Identity "Domain Admins" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
 $usersadmin1 = Get-ADGroupMember -Identity "Administrators" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
@@ -34,7 +34,7 @@ $Guest = Get-ADUser -Filter {SamAccountName -eq "Guest"} -Properties Enabled
 $inativos = Search-ADAccount –AccountInActive –UsersOnly –TimeSpan 180:00:00:00 –ResultPageSize 2000 –ResultSetSize $null | ?{$_.Enabled –eq $True} 
 
 
-#overview do AD (8 itens)
+## Variaveis de coleta de informações sobreo AD (8 itens)
 $Domain = Get-ADDomain
 $Forest = Get-ADForest
 $DomainName = $Domain.DNSRoot
@@ -54,14 +54,14 @@ $passdesblock = (Get-ADDefaultDomainPasswordPolicy).LockoutDuration
 $passage = (Get-ADDefaultDomainPasswordPolicy).MaxPasswordAge.days 
 $passage2 = (Get-ADDefaultDomainPasswordPolicy).MinPasswordAge.days 
 
-#Golden Ticket Attack 
+# variaveis de coleta de informações sobre o ataque Golden Ticket.
 $krbtgt = Get-ADUser -Filter {samAccountName -eq "krbtgt"} -Properties WhenChanged
 
-#DCSync attack Attack 
+# # variaveis de coleta de informações sobre o ataque DCSync.
 $reversiblePwd = Get-ADDefaultDomainPasswordPolicy 
 $reversiblePwd2 = $reversiblePwd.ReversibleEncryptionEnabled
 
-#Kerberos Delegation / Print Spooler service
+# Variaveis de coleta de informações sobre Kerberos Delegation / Print Spooler service
 $kerbdelegation = Get-ADObject -filter { (UserAccountControl -BAND 0x0080000) -OR (UserAccountControl -BAND 0x1000000) -OR (msDS-AllowedToDelegateTo -like '*') } -prop Name,ObjectClass,PrimaryGroupID,UserAccountControl,ServicePrincipalName,msDS-AllowedToDelegateTo
 
 foreach ($dc in $domainControllers) {
@@ -73,7 +73,10 @@ foreach ($dc in $domainControllers) {
   }
 }
 
-#Exibe overview do AD
+# ----------------------------------------------- #
+# Apresentação na tela das informações coletadas. #
+# ----------------------------------------------- #
+
 Write-Host "---------------------------------------------------------" 
 Write-Host "RESUMO DAS INFORMAÇÕES DO ACTIVE DIRECTORY" -ForegroundColor Yellow
 Write-Host "---------------------------------------------------------" 
@@ -96,8 +99,6 @@ Write-Host "Usuários inativos (180 dias)..........:" -ForegroundColor white -No
 Write-Host "Usuários com SIDHistory...............:" -ForegroundColor white -NoNewLine; Write-Host ""$userssidhistory.Count"" -ForegroundColor Red
 Write-Host "AdminSDHolder.........................:" -ForegroundColor white -NoNewLine; Write-Host ""$AdminsdHolder.Count"" -ForegroundColor Red
 Write-Host "Conta Guest Habilitada................:" -ForegroundColor white -NoNewLine; Write-Host " $($Guest.name.ToString().count)" -ForegroundColor Red
-
-
 Write-Host "---------------------------------------------------------" 
 Write-Host "POLITICA DE SENHA DO DOMINIO" -ForegroundColor Yellow
 Write-Host "---------------------------------------------------------" 
@@ -123,12 +124,12 @@ Write-Host "Kerberos Delegation...................:" -ForegroundColor white -NoN
 Write-Host "DCs com Print Spooler Habilitado......:" -ForegroundColor White -NoNewline; Write-Host ""$spoolerEnabled.count"" -ForegroundColor Red
 Write-Host "---------------------------------------------------------" 
 
-
-#exportação de usuários no formato CSV.
-
+# ----------------------------------------- #
+# Exportação de informações no formato CSV. #
+# ----------------------------------------- #
+# Verificação do diretório "temp" e listagem de arquivos CSV.
 
 $folder = "C:\temp"
-
 if (!(Test-Path -Path $folder)) {
     New-Item -ItemType Directory -Path $folder
     Write-Host "Pasta $folder criada com sucesso." -ForegroundColor Green
@@ -146,12 +147,11 @@ if ($csvFiles) {
 } else {
     Write-Host "Não foi possivel gravar os arquivos .csv na pasta $folder" -ForegroundColor Red
 }
-# Export the results to a CSV file
+ 
 $userspne | Export-Csv -Path "C:\temp\users-password-never-expire.csv" -NoTypeInformation -Encoding UTF8
 $usersadmin | Export-Csv -Path "C:\temp\users-domain-admins.csv" -NoTypeInformation -Encoding UTF8
 $usersadmin1 | Export-Csv -Path "C:\temp\users-domain-administrators.csv" -NoTypeInformation -Encoding UTF8
 $usersdisabled | Export-Csv -Path "C:\temp\users-disabled.csv" -NoTypeInformation -Encoding UTF8
-# $result | Export-Csv -Path "C:\temp\domain-info.csv" -NoTypeInformation -Encoding UTF8
 $users180dias | Export-Csv -Path "C:\temp\users-not-logged-on-180-days.csv" -NoTypeInformation -Encoding UTF8
 $userssidhistory | Export-Csv -Path "C:\temp\users-sidhistory.csv" -NoTypeInformation -Encoding UTF8
 $AdminsdHolder  | Export-Csv -Path "C:\temp\AdminsdHolder.csv" -NoTypeInformation -Encoding UTF8
