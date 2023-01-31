@@ -1,4 +1,10 @@
-﻿Import-Module ActiveDirectory
+# Assessamento de segurança no Active Directory
+# Objetivo: Coletar informações e identificar pontos críticos na segurança do AD
+# Autor: Daniel Donda
+# Data: 30/01/2023
+# Nota: Este script coleta informações sobre o AD e exibe na tela. Não execute em produção sem autorização.
+
+Import-Module ActiveDirectory
 Clear-Host
 #calcula 180 dias
 $date = Get-Date
