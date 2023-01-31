@@ -12,7 +12,7 @@ Realizar um assessment de segurança no Active Directory é importante por vári
 
 O assessment de segurança no Active Directory é crucial para garantir que o seu ambiente seja seguro e protegido contra ameaças.
 
-O Script exibe:
+O script apresentará um resumo do seu **Active Directory**
 
 - Nível funcional da floresta     
 - Quantidade de usuários     
@@ -20,15 +20,29 @@ O Script exibe:
 - Quantidade de domain controllers 
 - Quantidade de grupos 
 - Quantidade de OUs
-- Usuários com senha que nunca expira *(exibe a quantidade e gera um csv com a lista de objetos)*
-- Usuários sem logon (180 dias) *(exibe a quantidade e gera um csv com a lista de objetos)*
-- Usuários no grupo Domain Admins *(exibe a quantidade e gera um csv com a lista de objetos)*
-- Usuários no grupo Administrators *(exibe a quantidade e gera um csv com a lista de objetos)*
-- Usuários inativos (180 dias) *(exibe a quantidade e gera um csv com a lista de objetos)*
-- Usuários com SIDHistory *(exibe a quantidade e gera um csv com a lista de objetos)*
-- AdminSDHolder *(exibe a quantidade e gera um csv com a lista de objetos)*
-- Conta Guest Habilitada - *Apenas exibe na tela* 
-- Politica de senha - *Apenas exibe na tela*
+- Usuários com senha que nunca expira 
+- Usuários sem logon (180 dias) 
+- Usuários no grupo Domain Admins
+- Usuários no grupo Administrators 
+- Usuários inativos (180 dias) 
+- Usuários com SIDHistory 
+- AdminSDHolder 
+- Conta Guest Habilitada 
+- Politica de senha 
+
+Irá criar uma lista de 10 arquivos CSV com:
+
+- Usuários com senha que nunca  
+- Usuários desabilitados 
+- Usuários sem logon (180 dias) 
+- Usuários no grupo Domain Admins 
+- Usuários no grupo Administrators 
+- Usuários inativos (180 dias) 
+- Admins Usuários AdminSDHolder
+- Controladores de domínio com Printer spooler habilitado
+- Kerberos Delegation 
+
+Irá gerar também um resumo em TXT e um arquivo contendo as HASHES de todos os arquivos gerados.
 
 *O arquivo CSV permite o uso do PowerBI ou do Excel para gerar gráficos e listas de verificação.*
 *Ao importar um arquivo CSV para o PowerBI ou o Excel, você pode usar as funcionalidades de visualização de dados para criar gráficos, tabelas, dashboards e outras formas de representar informações.*
