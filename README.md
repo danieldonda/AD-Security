@@ -30,6 +30,10 @@ O Script exibe:
 - Conta Guest Habilitada - *Apenas exibe na tela* 
 - Politica de senha - *Apenas exibe na tela*
 
+*O arquivo CSV permite o uso do PowerBI ou do Excel para gerar gráficos e listas de verificação.*
+*Ao importar um arquivo CSV para o PowerBI ou o Excel, você pode usar as funcionalidades de visualização de dados para criar gráficos, tabelas, dashboards e outras formas de representar informações.*
+
+
 # Destaque
 
 - **GOLDEN TICKET ATTACK** - Exibe quando foi modificada a conta krbtgt
