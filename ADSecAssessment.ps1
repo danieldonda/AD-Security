@@ -33,19 +33,6 @@ Write-Host "/_/   \_\____/  |____/ \___|\___|\__,_|_|  |_|\__|\__, | "
 Write-Host "                                                  |___/  "                                               
 Write-Host "AD SECURITY ASSESSMENT 1.1 | "$date -ForegroundColor Green
 Write-Host "=========================================================" 
-                                                                                                                                                                          
-#-----------------------------------------------------#
-# variaveis de coleta de informações sobre as contas  #
-#-----------------------------------------------------#
-$userspne = Get-ADUser -Filter {(PasswordNeverExpires -eq $true)} -Properties DisplayName,SamAccountName,PasswordLastSet
-$usersadmin = Get-ADGroupMember -Identity "Domain Admins" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
-$usersadmin1 = Get-ADGroupMember -Identity "Administrators" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
-$usersdisabled = Get-ADUser -Filter {(Enabled -eq $false)} -Properties DisplayName,SamAccountName,PasswordLastSet
-$users180dias = Get-ADUser -Filter {LastLogonTimeStamp -lt $180daysAgo} -Properties DisplayName,SamAccountName,LastLogonTimeStamp
-$userssidhistory = Get-ADUser -LDAPFilter '(!sidhistory=*)' -Properties DisplayName,SamAccountName,sidhistory
-$AdminsdHolder=  get-aduser -Filter {admincount -gt 0} -Properties adminCount -ResultSetSize $null  
-$Guest = Get-ADUser -Filter {SamAccountName -eq "Guest"} -Properties Enabled 
-$inativos = Search-ADAccount –AccountInActive –UsersOnly –TimeSpan 180:00:00:00 –ResultPageSize 2000 –ResultSetSize $null | ?{$_.Enabled –eq $True} 
 
 #------------------------------------------------#
 # Variaveis de coleta de informações sobre o AD  #
@@ -59,6 +46,39 @@ $ComputersCount = (Get-ADComputer -Filter * -SearchBase $Domain.DistinguishedNam
 $GroupsCount = (Get-ADGroup -Filter * -SearchBase $Domain.DistinguishedName).Count
 $domainControllers = Get-ADDomainController -Filter *
 $OUsCount = (Get-ADOrganizationalUnit -Filter * -SearchBase $Domain.DistinguishedName).Count
+
+                                                                                                                                                                          
+#-----------------------------------------------------#
+# variaveis de coleta de informações sobre as contas  #
+#-----------------------------------------------------#
+$userspne = Get-ADUser -Filter {(PasswordNeverExpires -eq $true)} -Properties DisplayName,SamAccountName,PasswordLastSet
+$tuserspne = $userspne.Count
+
+$usersadmin = Get-ADGroupMember -Identity "Domain Admins" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
+$tusersadmin = $usersadmin.count 
+
+$usersadmin1 = Get-ADGroupMember -Identity "Administrators" -Recursive | Get-ADUser -Properties DisplayName,SamAccountName
+$tusersadmin1 = $usersadmin1.count
+ 
+$usersdisabled = Get-ADUser -Filter {(Enabled -eq $false)} -Properties DisplayName,SamAccountName,PasswordLastSet
+$tusersdisabled = $usersdisabled.Count
+
+
+$users180dias = Get-ADUser -Filter {LastLogonTimeStamp -lt $180daysAgo} -Properties DisplayName,SamAccountName,LastLogonTimeStamp
+$tusers180dias = $users180dias.Count
+
+
+$userssidhistory = Get-ADUser -LDAPFilter '(!sidhistory=*)' -Properties DisplayName,SamAccountName,sidhistory
+$tuserssidhistory = $userssidhistory.count
+
+$AdminsdHolder=  get-aduser -Filter {admincount -gt 0} -Properties adminCount -ResultSetSize $null  
+
+$tAdminsdHolder= $AdminsdHolder.Count
+
+$Guest = Get-ADUser -Filter {SamAccountName -eq "Guest"} -Properties Enabled 
+
+$inativos = Search-ADAccount –AccountInActive –UsersOnly –TimeSpan 180:00:00:00 –ResultPageSize 2000 –ResultSetSize $null | ?{$_.Enabled –eq $True} 
+$tinativos = $inativos.Count
 #--------------------------------------------------------------------#
 # Variaveis de coleta de informações sobre a politica de senha do AD #
 #--------------------------------------------------------------------#
@@ -110,14 +130,14 @@ Write-Host "Quantidade de OUs.....................:" -ForegroundColor white -NoN
 Write-Host "---------------------------------------------------------" 
 Write-Host "INFORMAÇÕES DE OBJETOS (CSV)" -ForegroundColor Yellow
 Write-Host "---------------------------------------------------------" 
-Write-Host "Usuários com senha que nunca expira...:" -ForegroundColor white -NoNewLine; Write-Host ""$userspne.Count""  -ForegroundColor Red
-Write-Host "Usuários desabilitados................:" -ForegroundColor white -NoNewLine; Write-Host ""$usersdisabled.Count"" -ForegroundColor Red
-Write-Host "Usuários sem logon (180 dias..........:" -ForegroundColor white -NoNewLine; Write-Host ""$users180dias.Count"" -ForegroundColor Red
-Write-Host "Usuários no grupo Domain Admins.......:" -ForegroundColor white -NoNewLine; Write-Host ""$usersadmin.Count"" -ForegroundColor Red
-Write-Host "Usuários no grupo Administrators......:" -ForegroundColor white -NoNewLine; Write-Host ""$usersadmin1.Count"" -ForegroundColor Red
-Write-Host "Usuários inativos (180 dias)..........:" -ForegroundColor white -NoNewLine; Write-Host ""$inativos.Count"" -ForegroundColor Red
-Write-Host "Usuários com SIDHistory...............:" -ForegroundColor white -NoNewLine; Write-Host ""$userssidhistory.Count"" -ForegroundColor Red
-Write-Host "AdminSDHolder.........................:" -ForegroundColor white -NoNewLine; Write-Host ""$AdminsdHolder.Count"" -ForegroundColor Red
+Write-Host "Usuários com senha que nunca expira...:" -ForegroundColor white -NoNewLine; Write-Host ""$tuserspne""  -ForegroundColor Red
+Write-Host "Usuários desabilitados................:" -ForegroundColor white -NoNewLine; Write-Host ""$tusersdisabled"" -ForegroundColor Red
+Write-Host "Usuários sem logon (180 dias..........:" -ForegroundColor white -NoNewLine; Write-Host ""$tusers180dias"" -ForegroundColor Red
+Write-Host "Usuários no grupo Domain Admins.......:" -ForegroundColor white -NoNewLine; Write-Host ""$tusersadmin"" -ForegroundColor Red
+Write-Host "Usuários no grupo Administrators......:" -ForegroundColor white -NoNewLine; Write-Host ""$tusersadmin1"" -ForegroundColor Red
+Write-Host "Usuários inativos (180 dias)..........:" -ForegroundColor white -NoNewLine; Write-Host ""$tinativos"" -ForegroundColor Red
+Write-Host "Usuários com SIDHistory...............:" -ForegroundColor white -NoNewLine; Write-Host ""$tuserssidhistory"" -ForegroundColor Red
+Write-Host "AdminSDHolder.........................:" -ForegroundColor white -NoNewLine; Write-Host ""$tAdminsdHolder"" -ForegroundColor Red
 Write-Host "Conta Guest Habilitada................:" -ForegroundColor white -NoNewLine; Write-Host " $($Guest.name.ToString().count)" -ForegroundColor Red
 Write-Host "---------------------------------------------------------" 
 Write-Host "POLITICA DE SENHA DO DOMINIO" -ForegroundColor Yellow
@@ -144,6 +164,60 @@ Write-Host "Kerberos Delegation...................:" -ForegroundColor white -NoN
 Write-Host "DCs com Print Spooler Habilitado......:" -ForegroundColor White -NoNewline; Write-Host ""$spoolerEnabled.count"" -ForegroundColor Red
 Write-Host "---------------------------------------------------------" 
 
+New-Item $folder/ADSecAssessment-Overview.txt -type file -Force >null
+
+$bloco = @("
+---------------------------------------------------------  
+RESUMO DAS INFORMAÇÕES DO ACTIVE DIRECTORY                 
+--------------------------------------------------------- 
+ Nome do domínio.......................: $domainName         
+ Nível funcional da floresta...........: $ForestFunctionalLevel 
+ Quantidade de usuários................: $usersCount 
+ Quantidade de computadores............: $computersCount 
+ Quantidade de domain controllers......: $domainControllers
+ Quantidade de grupos..................: $GroupsCount 
+ Quantidade de OUs.....................: $OUsCount 
+ ---------------------------------------------------------  
+ INFORMAÇÕES DE OBJETOS (CSV) 
+ --------------------------------------------------------- 
+ Usuários com senha que nunca expira...: $tuserspne
+ Usuários desabilitados................: $tusersdisabled
+ Usuários sem logon (180 dias..........: $tusers180dias
+ Usuários no grupo Domain Admins.......: $tusersadmin
+ Usuários no grupo Administrators......: $tusersadmin1
+ Usuários inativos (180 dias)..........: $tinativos 
+ Usuários com SIDHistory...............: $tuserssidhistory
+ AdminSDHolder.........................: $tAdminsdHolder
+ Conta Guest Habilitada................: $Guest
+ ---------------------------------------------------------  
+ POLITICA DE SENHA DO DOMINIO 
+ ---------------------------------------------------------  
+ Politica de senha - Complexidade......: $passcomp 
+ Politica de senha - Tamanho da senha..: $passlengh 
+ Politica de senha - Historico.........: $passhistory 
+ Politica de senha - Tentativas erradas: $passblock 
+ Politica de senha - Tempo de bloqueio.: $passdesblock 
+ Politica de senha - Idade maxima......: $passage 
+ Politica de senha - Idade Minima......: $passage2 
+ --------------------------------------------------------- 
+ GOLDEN TICKET ATTACK  
+ ---------------------------------------------------------  
+ A conta krbtgt foi modificada em:..:  $($krbtgt.WhenChanged.ToString()) 
+ ---------------------------------------------------------  
+ DCSYNC ATTACK  
+ --------------------------------------------------------- 
+ Criptografia reversivel habiltada.....: $reversiblePwd2   
+ --------------------------------------------------------- 
+ PRINT SPOOLER ATTACK 
+ --------------------------------------------------------- 
+ Kerberos Delegation...................:  $($kerbdelegation.name.ToString().count) 
+ DCs com Print Spooler Habilitado......: $spoolerEnabled.count 
+ --------------------------------------------------------- 
+
+")
+
+$bloco | Add-Content $folder/ADSecAssessment-Overview.txt
+
 # ----------------------------------------- #
 # Exportação de informações no formato CSV. #
 # ----------------------------------------- #
@@ -164,7 +238,7 @@ $inativos | Export-Csv -Path "C:\temp\usuarios-inativos.csv" -NoTypeInformation 
 $csvFiles = Get-ChildItem -Path $folder -Filter "*.csv" -Recurse
 
 if ($csvFiles) {
-    Write-Host  $csvFiles.count "Arquivos .csv criados com sucesso:" -ForegroundColor Green
+    Write-Host  $csvFiles.count "Arquivos .csv criados com sucesso" -ForegroundColor Green
     foreach ($file in $csvFiles) {
        # Write-Host $file.count
     }
@@ -172,4 +246,12 @@ if ($csvFiles) {
     Write-Host "Não foi possivel gravar os arquivos .csv na pasta $folder" -ForegroundColor Red
 }
  
+# Geração de hash 
 
+$arquivos = Get-ChildItem $folder
+
+foreach ($arquivo in $arquivos) {
+  $hash = (Get-FileHash $arquivo.FullName).Hash
+  Write-host "$($arquivo.Name) - $hash" *>> $folder/ADSecAssessment-Hash.txt
+}
+Write-Host "Hashes criado com sucesso" -ForegroundColor Green
