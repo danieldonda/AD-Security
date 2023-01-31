@@ -80,6 +80,9 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 Version 1.1
 Janeiro de 2023
 Otimização do código e suas variaveis.
+Geração de resumo em txt 
+Geração de hash dos arquivos gerados (para uso como evidencia de ações de correção em incidentes)
+
 
 Version 1.0
 Janeiro de 2023, versão inicial
