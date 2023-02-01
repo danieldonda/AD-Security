@@ -54,8 +54,7 @@ Irá gerar também um resumo em TXT e um arquivo contendo as HASHES de todos os 
 - **DCSYNC ATTACK** - Exibe contas com a criptografia reversivel habiltada
 - **PRINT SPOOLER ATTACK** - Exibe Kerberos Delegation e os DCs com Print Spooler Habilitado
 
-![image](https://user-images.githubusercontent.com/16530643/215624922-d7163079-932c-467e-8155-16e12fbde82f.png)
-
+![image](https://user-images.githubusercontent.com/16530643/216141192-814fdd3d-34ba-48cd-a3fb-dc95c8a51ff6.png)
 
 ## Como usar?
 
