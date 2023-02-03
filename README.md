@@ -2,9 +2,9 @@
 Repositório com scripts voltados à segurança do Active Directory com propósito de  documentar e compartilhar as soluções e técnicas utilizadas para aumentar a segurança da infraestrutura de Active Directory além de contribuir para a comunidade de profissionais de segurança. 
 
 ## Conteúdo
-- [AD-Security-Assesment](#AD-Security-Assesment)
-- [NTLMHashGenerator](#NTLMHash-Generator)
-- [Projetos-recomendados](#Projetos-recomendados)
+- [AD Security Assesment](#AD-Security-Assesment)
+- [NTLM Hash Generator](#NTLM-Hash-Generator)
+- [Projetos recomendados](#Projetos-recomendados)
 
 
 # AD-Security-Assesment
@@ -97,18 +97,33 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 - T1600: Kerberos Silver Ticket
 - T1603: Kerberos Authentication Request Spoofing
 
-
 # Hash-Generator
 
-Este script usa o .NET Framework para calcular o hash SHA-1 a partir de uma lista de senhas em um arquivo de texto puro.
-Ideal para criar um dicionario de senhas que podem ser utilizadas para avaliação de segurança.
+Este script usa o .NET Framework para calcular o hash SHA-1 a partir de uma lista de senhas em um arquivo de texto puro. Ideal para criar um dicionario de senhas que podem ser utilizadas para avaliação de segurança.
+
+![image](https://user-images.githubusercontent.com/16530643/216683217-9d662776-8a46-4dc9-84b6-246ec33e69ec.png)
+
 
 # Como usar ?
 Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile.
 Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile.
 Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
 
+
+
+# NTLM-Hash-Generator
+
+Este script permite calcular o hash NTLM usando o ConvertTo-NTHash do módulo DSInternals a partir de uma lista de senhas em um arquivo de texto puro.
+
 ![image](https://user-images.githubusercontent.com/16530643/216614970-01732664-047e-4b6c-80e8-46f5eb2db7e3.png)
+# Como usar ?
+Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile.
+Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile.
+Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
+
+
+
+
 
 ## Projetos recomendados
 
