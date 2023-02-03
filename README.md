@@ -3,6 +3,7 @@ Repositório com scripts voltados à segurança do Active Directory com propósi
 
 ## Conteúdo
 - [AD Security Assesment](#AD-Security-Assesment)
+- [Hash Generator](#Hash-Generator)
 - [NTLM Hash Generator](#NTLM-Hash-Generator)
 - [Projetos recomendados](#Projetos-recomendados)
 
