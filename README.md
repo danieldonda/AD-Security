@@ -103,8 +103,8 @@ Este script usa o .NET Framework para calcular o hash SHA-1 a partir de uma list
 Ideal para criar um dicionario de senhas que podem ser utilizadas para avaliação de segurança.
 
 # Como usar ?
-Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile
-Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile
+Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile.
+Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile.
 Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
 
 ![image](https://user-images.githubusercontent.com/16530643/216614970-01732664-047e-4b6c-80e8-46f5eb2db7e3.png)
