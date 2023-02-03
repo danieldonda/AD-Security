@@ -3,7 +3,8 @@ Repositório com scripts voltados à segurança do Active Directory com propósi
 
 ## Conteúdo
 - [AD-Security-Assesment](#AD-Security-Assesment)
-- [HashGenerator](#Hash-Generator)
+- [NTLMHashGenerator](#NTLMHash-Generator)
+- [Projetos-recomendados](#Projetos-recomendados)
 
 
 # AD-Security-Assesment
@@ -109,4 +110,12 @@ Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no B
 
 ![image](https://user-images.githubusercontent.com/16530643/216614970-01732664-047e-4b6c-80e8-46f5eb2db7e3.png)
 
+## Projetos recomendados
+
+- [Mimikatz](https://github.com/gentilkiwi/mimikatz)  - A ferramenta No.1 para ataques pass-the-hash. 
+- [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) - Directory Services Internals  PowerShell Module and Framework.
+- [NTDSXtract](https://github.com/csababarta/ntdsxtract) - Uma estrutura para análise de ntds.dit escrita em Python. 
+- [Impacket](https://github.com/SecureAuthCorp/impacket) - Vários protocolos baseados em MSRPC implementados em Python. 
+- [DIT Snapshot Viewer](https://github.com/yosqueoy/ditsnap) - Uma ferramenta  de inspeção gráfica para bancos de dados do Active Directory. 
+- [Esent  Workbench](https://bitbucket.org/orthoprog/esentworkbench/wiki/Home) - Ótima ferramenta para exibir a estrutura dos arquivos ntds.dit.
 
