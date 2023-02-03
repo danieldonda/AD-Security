@@ -70,7 +70,7 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 
 # Mitre Att&ck
 
-## TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK para o ataque **Golden Ticket** 
+### TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK para o ataque **Golden Ticket** 
 
 - T1110.001: Brute Force: Utilização de técnicas de força bruta para adquirir o hash Kerberos do usuário administrador da conta KRBTGT.
 - T1559.002: Domain Hierarchy Traversal: Comprometimento da conta KRBTGT para aproveitar a sua capacidade de criar tickets Kerberos válidos para qualquer usuário ou computador em todo o domínio.
@@ -78,7 +78,7 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 - T1208: Exploitation of Trusted Relationships: Exploração de relações de confiança, como a autenticação Kerberos, para acessar recursos e dados sensíveis.
 - T1212: Exploitation of Vulnerability: Aproveitamento de vulnerabilidades do sistema para obter acesso privilegiado, como a obtenção de hash do KRBTGT.
 
-## TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK para o ataque **DCSync** 
+### TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK para o ataque **DCSync** 
 
 - T1110 - Brute Force
 - T1003.001 - Credential Dumping: LSASS Memory
@@ -87,7 +87,7 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 - T1021 - Remote Services
 - T1041 - Exfiltration Over Command and Control Channel
 
-## Os IDs dos TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK que abusam de Kerberos Delegation são:
+### Os IDs dos TTPs (Tactics, Techniques and Procedures) listados no MITRE ATT&CK que abusam de Kerberos Delegation são:
 
 - T1208: Kerberos Delegation
 - T1569: Kerberos Golden Ticket
@@ -104,7 +104,7 @@ Este script usa o .NET Framework para calcular o hash SHA-1 a partir de uma list
 ![image](https://user-images.githubusercontent.com/16530643/216683217-9d662776-8a46-4dc9-84b6-246ec33e69ec.png)
 
 
-# Como usar ?
+## Como usar ?
 Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile.
 Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile.
 Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
@@ -115,13 +115,11 @@ Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no B
 
 Este script permite calcular o hash NTLM usando o ConvertTo-NTHash do módulo DSInternals a partir de uma lista de senhas em um arquivo de texto puro.
 
-![image](https://user-images.githubusercontent.com/16530643/216614970-01732664-047e-4b6c-80e8-46f5eb2db7e3.png)
-# Como usar ?
+![image](https://user-images.githubusercontent.com/16530643/216683488-485157c9-806a-4fb6-8995-4c07249b59c3.png)
+
+## Como usar ?
 Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile.
 Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile.
-Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
-
-
 
 
 
