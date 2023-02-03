@@ -100,7 +100,9 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 # Hash-Generator
 
 Este script usa o .NET Framework para calcular o hash SHA-1 a partir de uma lista de senhas em um arquivo de texto puro. Ideal para criar um dicionario de senhas que podem ser utilizadas para avaliação de segurança.
-![image](https://user-images.githubusercontent.com/16530643/216683898-f691e8f3-8422-4023-81fa-bafd01b58c3d.png)
+
+![image](https://user-images.githubusercontent.com/16530643/216684064-66e81bc4-19a4-45e6-b7a1-315fc03deb33.png)
+
 
 
 ## Como usar ?
@@ -109,10 +111,10 @@ Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outp
 Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
 
 
-
 # NTLM-Hash-Generator
 
 Este script permite calcular o hash NTLM usando o ConvertTo-NTHash do módulo DSInternals a partir de uma lista de senhas em um arquivo de texto puro.
+
 ![image](https://user-images.githubusercontent.com/16530643/216683799-453b566e-0dc5-482b-8950-15a4899837fa.png)
 
 ## Como usar ?
