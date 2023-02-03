@@ -3,7 +3,7 @@ O propósito de criar este repositório no GitHub com scripts voltados à segura
 
 ## Conteúdo
 [AD-Security-Assesment](#AD-Security-Assesment)
-- SCRIPT - HashGenerator
+[HashGenerator](#Hash-Generator)
 
 
 # AD-Security-Assesment
@@ -96,13 +96,16 @@ Basta baixar o arquivo e executar com credenciais adminmistrativas em controlado
 - T1600: Kerberos Silver Ticket
 - T1603: Kerberos Authentication Request Spoofing
 
-# Version History
-Version 1.1
-Janeiro de 2023
-Otimização do código e suas variaveis.
-Geração de resumo em txt 
-Geração de hash dos arquivos gerados (para uso como evidencia de ações de correção em incidentes)
 
+# Hash-Generator
 
-Version 1.0
-Janeiro de 2023, versão inicial
+Este script usa o .NET Framework para calcular o hash SHA-1 a partir de uma lista de senhas em um arquivo de texto puro.
+Ideal para criar um dicionario de senhas que podem ser utilizadas para avaliação de segurança.
+
+# Como usar ?
+Defina o arquivo de entrada (arquivo com senhas em texto puro) na variável $inputFile
+Defina o caminho para salvar o arquivo de saida (senhas no formato hash 1) $outputFile
+Neste repositorio deixo disponível um arquivo com as 50 senhas mais usadas no Brasil (senhas-texto-puro.txt) 
+
+![image](https://user-images.githubusercontent.com/16530643/216614828-5347ab92-2318-4688-a0c4-931762c19c75.png)
+
